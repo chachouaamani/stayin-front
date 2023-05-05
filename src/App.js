@@ -14,6 +14,8 @@ import Booking from './Booking';
 import BookingsPage from "./pages/BookingsPage";
 import PlacesPage from "./pages/PlacesPage";
 import ProfilePage from "./pages/ProfilePage.jsx";
+import { PageRoutes } from './Routes/PageRoutes';
+import SignupPage from './pages/SignupPage';
 
 axios.defaults.baseURL = 'http://localhost:8800';
 
@@ -32,12 +34,19 @@ function App() {
   }, [id]);
 
   if (!appartement) return ''; */
+  // var isLogin =true; // windows.location == PageRoutes.Login;
+  
+  // if(isLogin){
+  //   return <SignupPage/>;
+  // }
+
   return (
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout/>}>
         <Route index element={<IndexPage/>} />
-        <Route path="/login" element={<LoginPage/>} />
+        <Route path={PageRoutes.Login} element={<LoginPage/>} />
+        <Route path={PageRoutes.SignUp} element={<SignupPage/>} />
         <Route path="/account/bookings/:id" element={<BookingPage />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/account/bookings" element={<BookingsPage />} />
