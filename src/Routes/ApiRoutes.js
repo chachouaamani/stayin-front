@@ -1,4 +1,4 @@
 export class ApiRoutes {
-    static Login = "/login";
-    static SignUp = "/signup";
+    static Login = "/auth/login";
+    static SignUp = "/auth/signup";
 }

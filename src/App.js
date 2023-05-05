@@ -40,18 +40,22 @@ function App() {
   //   return <SignupPage/>;
   // }
 
+
   return (
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout/>}>
         <Route index element={<IndexPage/>} />
-        <Route path={PageRoutes.Login} element={<LoginPage/>} />
-        <Route path={PageRoutes.SignUp} element={<SignupPage/>} />
         <Route path="/account/bookings/:id" element={<BookingPage />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/account/bookings" element={<BookingsPage />} />
         <Route path="/account" element={<ProfilePage />} />
           <Route path="/account/places" element={<PlacesPage />} />
+      </Route>
+
+      <Route>
+        <Route path={PageRoutes.Login} element={<LoginPage/>} />
+        <Route path={PageRoutes.SignUp} element={<SignupPage/>} />
       </Route>
     
     </Routes>
