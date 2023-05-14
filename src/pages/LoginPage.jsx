@@ -3,6 +3,8 @@ import { PageRoutes } from "../Routes/PageRoutes";
 import { UserLoginModel } from "../Models/UserLoginModel";
 import { ApiRoutes } from "../Routes/ApiRoutes";
 import { AppConsts } from "../Routes/AppConsts";
+import { Link } from "react-router-dom";
+
 
 
 // Whether we are currently logging in
@@ -109,7 +111,7 @@ const LoginPage = () => {
               <div>Find your perfect place to call home, with just a tap of your finger.</div>
             </div>
             <div className="right">
-              <div>Log in <span>or</span>&nbsp;<a href={PageRoutes.SignUp}>Sign up ?</a></div>
+              <div>Log in <span>or</span>&nbsp;<Link to={PageRoutes.SignUp}>Sign up ?</Link></div>
               <input type="email" placeholder="email" id="loginemail" /><br />
               <input type="password" placeholder="password" id="loginpassword" /><br />
               <button onClick={(e) => Login(e)}>Login</button>
