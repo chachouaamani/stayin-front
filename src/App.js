@@ -44,7 +44,11 @@ function App() {
         <Route path="/account" element={<ProfilePage />} />
           <Route path="/account/places" element={<PlacesPage />} />
       </Route>
-    
+     <Route>
+        <Route path={PageRoutes.Login} element={<LoginPage/>} />
+        <Route path={PageRoutes.SignUp} element={<SignupPage/>} />
+      </Route>
+
     </Routes>
     </BrowserRouter>
     

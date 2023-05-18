@@ -36,3 +36,342 @@
     transform: rotate(360deg);
   }
 }
+
+/* Login page styles */
+
+@font-face {
+  font-display: swap;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url("/public/assets/fonts/nunito-sans-v12-latin-300.woff2") format("woff2"), url("/public/assets/fonts/nunito-sans-v12-latin-300.woff") format("woff")
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url("/public/assets/fonts/nunito-sans-v12-latin-regular.woff2") format("woff2"), url("/public/assets/fonts/nunito-sans-v12-latin-regular.woff") format("woff")
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url("/public/assets/fonts/nunito-sans-v12-latin-600.woff2") format("woff2"), url("/public/assets/fonts/nunito-sans-v12-latin-600.woff") format("woff")
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url("/public/assets/fonts/nunito-sans-v12-latin-700.woff2") format("woff2"), url("/public/assets/fonts/nunito-sans-v12-latin-700.woff") format("woff")
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 800;
+  src: url("/public/assets/fonts/nunito-sans-v12-latin-800.woff2") format("woff2"), url("/public/assets/fonts/nunito-sans-v12-latin-800.woff") format("woff")
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 900;
+  src: url("/public/assets/fonts/nunito-sans-v12-latin-900.woff2") format("woff2"), url("/public/assets/fonts/nunito-sans-v12-latin-900.woff") format("woff")
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito Sans', sans-serif
+}
+
+.login-page>img {
+  margin-bottom: -4px;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0
+}
+
+.login-page>div:nth-child(2) {
+  z-index: 5;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%
+}
+
+.login-page>div:nth-child(2)>div {
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px
+}
+
+.login-page>div:nth-child(2)>div>.background {
+  width: 800px;
+  position: absolute;
+  z-index: 2;
+  background: linear-gradient(125deg, rgba(0, 206, 224, 0.55), rgba(0, 206, 224, 0.5), rgba(227, 239, 239, 0.5), rgba(227, 239, 239, 0.4));
+  filter: blur(1.4px);
+  height: 100%;
+  margin-top: -48px;
+  border-radius: 24px
+}
+
+.login-page>div:nth-child(2)>div>.content {
+  position: relative;
+  z-index: 10;
+  margin: 48px;
+  display: flex
+}
+
+.login-page>div:nth-child(2)>div>.content>.left {
+  padding-right: 32px;
+  width: 50%
+}
+
+.login-page>div:nth-child(2)>div>.content>.left>div:nth-child(1) {
+  font-size: 48px;
+  color: #e3efef;
+  text-shadow: 1px 1px #00090A
+}
+
+.login-page>div:nth-child(2)>div>.content>.left>div:nth-child(2) {
+  font-size: 32px;
+  color: #e3efef;
+  text-shadow: 1px 1px #00090A;
+  margin-top: 80px
+}
+
+.login-page>div:nth-child(2)>div>.content>.right {
+  width: 50%
+}
+
+.login-page>div:nth-child(2)>div>.content>.right>div {
+  font-size: 48px;
+  color: #e3efef;
+  text-shadow: 1px 1px #00090A
+}
+
+.login-page>div:nth-child(2)>div>.content>.right>div>span {
+  font-size: 32px
+}
+
+.login-page>div:nth-child(2)>div>.content>.right>div>a {
+  font-size: 32px;
+  color: #00CEE0;
+  text-decoration: none;
+  display: inline-block
+}
+
+.login-page>div:nth-child(2)>div>.content>.right>div>a:hover {
+  transform: scale(1.05);
+  text-shadow: 1px 1px 1px #00090A
+}
+
+.login-page>div:nth-child(2)>div>.content>.right>input,
+.login-page>div:nth-child(2)>div>.content>.right>button {
+  font-size: 24px;
+  padding: 16px;
+  margin-top: 48px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 1px 1px 1px 0px rgba(0, 9, 10, 0.4);
+  transition: all 0.4s
+}
+
+.login-page>div:nth-child(2)>div>.content>.right>input:focus,
+.login-page>div:nth-child(2)>div>.content>.right>input:hover,
+.login-page>div:nth-child(2)>div>.content>.right>button:focus,
+.login-page>div:nth-child(2)>div>.content>.right>button:hover {
+  outline: none
+}
+
+.login-page>div:nth-child(2)>div>.content>.right>input {
+  padding-left: 24px;
+  background: linear-gradient(135deg, rgba(227, 239, 239, 0.6), rgba(227, 239, 239, 0.3))
+}
+
+.login-page>div:nth-child(2)>div>.content>.right>button {
+  background-color: #00CEE0
+}
+
+.login-page>div:nth-child(2)>div>.content>.right>button:focus,
+.login-page>div:nth-child(2)>div>.content>.right>button:hover {
+  cursor: pointer;
+  background-color: rgba(0, 206, 224, 0.8)
+}
+
+.login-page>div.errors {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10
+}
+
+.login-page>div.errors>div {
+  padding: 8px 16px;
+  margin-top: 16px;
+  background-color: rgba(0, 9, 10, 0.7);
+  border-radius: 8px;
+  color: #e3efef
+}
+
+/* End of Login page styles */
+
+
+
+
+/* Signup page styles */
+
+.signup-page>img {
+  margin-bottom: -4px;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0
+}
+
+.signup-page>div:nth-child(2) {
+  z-index: 5;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%
+}
+
+.signup-page>div:nth-child(2)>div {
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px
+}
+
+.signup-page>div:nth-child(2)>div>.background {
+  width: 800px;
+  position: absolute;
+  z-index: 2;
+  background: linear-gradient(125deg, rgba(0, 206, 224, 0.55), rgba(0, 206, 224, 0.5), rgba(227, 239, 239, 0.5), rgba(227, 239, 239, 0.4));
+  filter: blur(1.4px);
+  height: 100%;
+  margin-top: -48px;
+  border-radius: 24px
+}
+
+.signup-page>div:nth-child(2)>div>.content {
+  position: relative;
+  z-index: 10;
+  margin: 48px;
+  display: flex
+}
+
+.signup-page>div:nth-child(2)>div>.content>.left {
+  padding-right: 32px;
+  width: 50%
+}
+
+.signup-page>div:nth-child(2)>div>.content>.left>div:nth-child(1) {
+  font-size: 48px;
+  color: #e3efef;
+  text-shadow: 1px 1px #00090A
+}
+
+.signup-page>div:nth-child(2)>div>.content>.left>div:nth-child(2) {
+  font-size: 32px;
+  color: #e3efef;
+  text-shadow: 1px 1px #00090A;
+  margin-top: 80px
+}
+
+.signup-page>div:nth-child(2)>div>.content>.right {
+  width: 50%
+}
+
+.signup-page>div:nth-child(2)>div>.content>.right>div {
+  font-size: 48px;
+  color: #e3efef;
+  text-shadow: 1px 1px #00090A
+}
+
+.signup-page>div:nth-child(2)>div>.content>.right>div>span {
+  font-size: 32px
+}
+
+.signup-page>div:nth-child(2)>div>.content>.right>div>a {
+  font-size: 32px;
+  color: #00CEE0;
+  text-decoration: none;
+  display: inline-block
+}
+
+.signup-page>div:nth-child(2)>div>.content>.right>div>a:hover {
+  transform: scale(1.05);
+  text-shadow: 1px 1px 1px #00090A
+}
+
+.signup-page>div:nth-child(2)>div>.content>.right>input,
+.signup-page>div:nth-child(2)>div>.content>.right>button {
+  font-size: 24px;
+  padding: 16px;
+  margin-top: 24px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 1px 1px 1px 0px rgba(0, 9, 10, 0.4);
+  transition: all 0.4s
+}
+
+.signup-page>div:nth-child(2)>div>.content>.right>input:focus,
+.signup-page>div:nth-child(2)>div>.content>.right>input:hover,
+.signup-page>div:nth-child(2)>div>.content>.right>button:focus,
+.signup-page>div:nth-child(2)>div>.content>.right>button:hover {
+  outline: none
+}
+
+.signup-page>div:nth-child(2)>div>.content>.right>input {
+  padding-left: 24px;
+  background: linear-gradient(135deg, rgba(227, 239, 239, 0.6), rgba(227, 239, 239, 0.3))
+}
+
+.signup-page>div:nth-child(2)>div>.content>.right>button {
+  background-color: #00CEE0
+}
+
+.signup-page>div:nth-child(2)>div>.content>.right>button:focus,
+.signup-page>div:nth-child(2)>div>.content>.right>button:hover {
+  cursor: pointer;
+  background-color: rgba(0, 206, 224, 0.8)
+}
+
+.signup-page>div.errors {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10
+}
+
+.signup-page>div.errors>div {
+  padding: 8px 16px;
+  margin-top: 16px;
+  background-color: rgba(0, 9, 10, 0.7);
+  border-radius: 8px;
+  color: #e3efef
+}
+
+
+/* End of Signup page styles */
