@@ -40,14 +40,13 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout/>}>
         <Route index element={<IndexPage/>} />
-        <Route path="/login" element={<LoginPage/>} />
         <Route path="/account/bookings/:id" element={<BookingPage />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/account/bookings" element={<BookingsPage />} />
         <Route path="/account" element={<ProfilePage />} />
           <Route path="/account/places" element={<PlacesPage />} />
        <Route path='/account/:subpage/:action' element={<PlacesFormPage />}/>
-       <Route path='/places/:id' element={<PlacePage />}/>
+       <Route path='/places/:id' element={<PlacesPage />}/>
       
       
       </Route>
