@@ -4,13 +4,15 @@ import axios from "axios";
 import AddressLink from "../AddressLink";
 import PlaceGallery from "../PlaceGallery";
 import BookingDates from "../BookingDates";
+import { ApiRoutes } from "../Routes/ApiRoutes";
+axios.defaults.baseURL = 'http://localhost:8800';
 
 export default function BookingPage() {
   const {id} = useParams();
   const [reservation,setReservation] = useState(null);
   useEffect(() => {
     if (id) {
-      axios.get('/ms-reservation/reservation/getReservations').then(response => {
+      axios.get(ApiRoutes.GetReservation).then(response => {
         const foundBooking = response.data.find(({_id}) => _id === id);
         if (foundBooking) {
           setReservation(foundBooking);

@@ -1,6 +1,7 @@
 import {Link, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
+axios.defaults.baseURL = 'http://localhost:8800';
 
 import PlaceGallery from "../PlaceGallery";
 import AddressLink from "../AddressLink";
@@ -13,6 +14,7 @@ export default function PlacePage() {
       return;
     }
     axios.get(`/places/${id}`).then(response => {
+    // axios.get(ApiRoutes.GetPlaceById.replace("{id}",id)).then(response => {
       setPlace(response.data);
     });
   }, [id]);

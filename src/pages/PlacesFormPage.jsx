@@ -5,7 +5,8 @@ import AccountNav from "../AccountNav";
 import {Navigate, useParams} from "react-router-dom";
 import Perks from "../Perks.jsx";
 import axios from "axios";
-export default function PlacesFormPage() {
+    axios.defaults.baseURL = 'http://localhost:8800';
+    export default function PlacesFormPage() {
  // const {id} = useParams();
   const [title,setTitle] = useState('');
   
