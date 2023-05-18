@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter , Routes , Route } from 'react-router-dom';
 import IndexPage from './pages/IndexPage';
 import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import BookingPage from './pages/BookingPage';
 import Layout from  "./Layout";
 import BookingWidget from './BookingWidget';
@@ -14,6 +15,7 @@ import Booking from './Booking';
 import BookingsPage from "./pages/BookingsPage";
 import PlacesPage from "./pages/PlacesPage";
 import ProfilePage from "./pages/ProfilePage.jsx";
+import { PageRoutes } from './Routes/PageRoutes';
 
 axios.defaults.baseURL = 'http://localhost:8800';
 
