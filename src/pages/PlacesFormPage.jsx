@@ -5,7 +5,11 @@ import AccountNav from "../AccountNav";
 import { Navigate, useParams } from "react-router-dom";
 import Perks from "../Perks.jsx";
 import axios from "axios";
+
 axios.defaults.baseURL = 'http://localhost:8800';
+var storageReadFile = "https://localhost:5000/file/"
+var storageUploadFile = "https://localhost:5000/file/upload"
+
 export default function PlacesFormPage() {
   // const {id} = useParams();
   const [title, setTitle] = useState('');
@@ -63,64 +67,45 @@ export default function PlacesFormPage() {
   }
 
 
-  var storageMicroserviceLink = "https://localhost:5000/file/"
   function uploadPhoto(ev) {
     var file = {
       FileType: "",
       Content: ""
     }
+
     const files = ev.target.files;
 
-
+    // Get file extension
     var parts = files[0].name.split(".");
     file.FileType = "." + parts[parts.length - 1];
 
+    // Create file reader
     var reader = new FileReader();
 
+    // When data has been read
     reader.onload = async function (e) {
-      file.Content = window.btoa(window.unescape(encodeURIComponent(reader.result)));
+      // Base64 encode the contend of the file that we read
+      file.Content = window.btoa(reader.result);
 
-      axios.post('https://localhost:5000/file/upload', file, {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }).then(response => {
-
-        setAddedPhotos(prev => {
-          return [...prev, response.data];
+      // Send request to storage server
+      var result = await fetch(storageUploadFile,
+        {
+          method: "post",
+          body: JSON.stringify(file),
+          headers: { "Content-Type": "application/json" }
         });
 
-        console.log(addedPhotos)
-      }
-      )
+      // Get body of the response
+      var fileId = await result.text();
 
-
-
-      // var fileId = await fetch("https://localhost:5000/file/upload", 
-      // { method: "post",
-      //   body: file,
-      //   headers: { "Content-Type": "application/json" } 
-      // });
-
+      // Add the created file id to the list of ids of images
+      setAddedPhotos(prev => {
+        return [...prev, fileId];
+      });
 
     }
-    reader.readAsText(files[0]);
-
-
-    // console.log(files[0])
-
-    // const data = new FormData();
-    // for (let i = 0; i < files.length; i++) {
-    //   data.append('photos', files[i]);
-    // }
-    // axios.post('/upload', data, {
-    //   headers: { 'Content-type': 'multipart/form-data' }
-    // }).then(response => {
-    //   const { data: filenames } = response;
-    //   setAddedPhotos(prev => {
-    //     return [...prev, ...filenames];
-    //   });
-    // })
+    // Read the content of the file that we submitted
+    reader.readAsBinaryString(files[0]);
   }
 
   function removePhoto(ev, filename) {
@@ -158,12 +143,12 @@ export default function PlacesFormPage() {
 
         {preInput('Address', 'specify your exact address')}
 
-        <div class="p-6 border border-gray-300 sm:rounded-md">
+        <div className="p-6 border border-gray-300 sm:rounded-md">
 
-          <label class="block mb-6">
-            <span class="text-gray-700">Wilaya</span>
+          <label className="block mb-6">
+            <span className="text-gray-700">Wilaya</span>
             <input
-              name="Wilaya" type="text" class=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
+              name="Wilaya" type="text" className=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
             focus:ring
             focus:ring-indigo-200
             focus:ring-opacity-50 "
@@ -171,20 +156,20 @@ export default function PlacesFormPage() {
             />
           </label>
 
-          <label class="block mb-6">
-            <span class="text-gray-700">commune</span>
+          <label className="block mb-6">
+            <span className="text-gray-700">commune</span>
             <input
-              name="comune" type="text" class=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
+              name="comune" type="text" className=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
             focus:ring
             focus:ring-indigo-200
             focus:ring-opacity-50 "
               placeholder="commune" value={comun} onChange={ev => setComun(ev.target.value)}
             />
           </label>
-          <label class="block mb-6">
-            <span class="text-gray-700">Street</span>
+          <label className="block mb-6">
+            <span className="text-gray-700">Street</span>
             <input
-              name="street" type="text" class=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
+              name="street" type="text" className=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
             focus:ring
             focus:ring-indigo-200
             focus:ring-opacity-50 "
@@ -206,7 +191,7 @@ export default function PlacesFormPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                 </svg>
               </button>
-              <img src={storageMicroserviceLink + fileId} className="rounded-2xl w-full object-cover" />
+              <img src={storageReadFile + fileId} className="rounded-2xl w-full object-cover" />
 
             </div>
           ))}
@@ -258,12 +243,12 @@ export default function PlacesFormPage() {
 
 
 
-          <div class="p-6 border border-gray-300 sm:rounded-md flex flex-row ">
+          <div className="p-6 border border-gray-300 sm:rounded-md flex flex-row ">
 
-            <label class="block mb-6">
-              <span class="text-gray-700">Check in time</span>
+            <label className="block mb-6">
+              <span className="text-gray-700">Check in time</span>
               <input
-                name="Wilaya" type="text" class=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
+                name="Wilaya" type="text" className=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
         focus:ring
         focus:ring-indigo-200
         focus:ring-opacity-50 "
@@ -273,10 +258,10 @@ export default function PlacesFormPage() {
               />
             </label>
 
-            <label class="block mb-6">
-              <span class="text-gray-700">Check out time</span>
+            <label className="block mb-6">
+              <span className="text-gray-700">Check out time</span>
               <input
-                name="comune" type="text" class=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
+                name="comune" type="text" className=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
         focus:ring
         focus:ring-indigo-200
         focus:ring-opacity-50 "
@@ -286,10 +271,10 @@ export default function PlacesFormPage() {
               />
             </label>
 
-            <label class="block mb-6">
-              <span class="text-gray-700">Max number of guests</span>
+            <label className="block mb-6">
+              <span className="text-gray-700">Max number of guests</span>
               <input
-                name="comune" type="text" class=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
+                name="comune" type="text" className=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
         focus:ring
         focus:ring-indigo-200
         focus:ring-opacity-50 "
@@ -300,12 +285,12 @@ export default function PlacesFormPage() {
 
           </div>
 
-          <div class="p-6 border border-gray-300 sm:rounded-md flex flex-row">
+          <div className="p-6 border border-gray-300 sm:rounded-md flex flex-row">
 
-            <label class="block mb-6">
-              <span class="text-gray-700">Price per night</span>
+            <label className="block mb-6">
+              <span className="text-gray-700">Price per night</span>
               <input
-                name="Wilaya" type="text" class=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
+                name="Wilaya" type="text" className=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
         focus:ring
         focus:ring-indigo-200
         focus:ring-opacity-50 "
@@ -313,10 +298,10 @@ export default function PlacesFormPage() {
               />
             </label>
 
-            <label class="block mb-6">
-              <span class="text-gray-700">price per month</span>
+            <label className="block mb-6">
+              <span className="text-gray-700">price per month</span>
               <input
-                name="comune" type="text" class=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
+                name="comune" type="text" className=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300
         focus:ring
         focus:ring-indigo-200
         focus:ring-opacity-50 "
