@@ -1,11 +1,11 @@
 import {Link, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
-axios.defaults.baseURL = 'http://localhost:8800';
+
 
 import PlaceGallery from "../PlaceGallery";
 import AddressLink from "../AddressLink";
-
+axios.defaults.baseURL = 'http://localhost:8800';
 export default function PlacePage() {
   const {id} = useParams();
   const [place,setPlace] = useState(null);
