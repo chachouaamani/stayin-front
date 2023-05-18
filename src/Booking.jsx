@@ -32,6 +32,7 @@ export default function Booking(){
       
      const response= await axios.post('ms-reservation/reservation/createReservation' , {
         appartement:'6452c936bf0a60e911de6a8c', checkIn,checkOut,numberOfGuests,name,phone,
+      //  reservedDates:["2023-05-03" , "2023-05-04", "2023-05-05"],
        user:'644b00f26adfdd50acfb1324',
         reserved:false,
         price:numberOfNights* 250,
