@@ -16,6 +16,7 @@ import BookingsPage from "./pages/BookingsPage";
 import PlacesPage from "./pages/PlacesPage";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import { PageRoutes } from './Routes/PageRoutes';
+import PlacesFormPage from './pages/PlacesFormPage'
 
 axios.defaults.baseURL = 'http://localhost:8800';
 
@@ -45,6 +46,10 @@ function App() {
         <Route path="/account/bookings" element={<BookingsPage />} />
         <Route path="/account" element={<ProfilePage />} />
           <Route path="/account/places" element={<PlacesPage />} />
+       <Route path='/account/:subpage/:action' element={<PlacesFormPage />}/>
+       <Route path='/places/:id' element={<PlacePage />}/>
+      
+      
       </Route>
      <Route>
         <Route path={PageRoutes.Login} element={<LoginPage/>} />
