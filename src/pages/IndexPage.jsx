@@ -3,6 +3,8 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 import Image from "../Image.jsx";
 import AccountNav from "../AccountNav";
+axios.defaults.baseURL = 'http://localhost:8800';
+
 
 export default function IndexPage() {
   const [places,setPlaces] = useState([]);

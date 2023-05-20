@@ -6,7 +6,7 @@
   export default function Image({src,...rest}) {
     src = src && src.includes('https://')
       ? src
-      : 'http://localhost:4000/uploads/'+src;
+      : 'https://localhost:5000/file/'+src;
     return (
       <img {...rest} src={src} alt={''} />
     );

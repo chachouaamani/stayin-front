@@ -13,7 +13,7 @@ import Widget from './Widget';
 import Booking from './Booking';
 
 import BookingsPage from "./pages/BookingsPage";
-import PlacesPage from "./pages/PlacesPage";
+import PlacePage from "./pages/PlacePage";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import { PageRoutes } from './Routes/PageRoutes';
 import PlacesFormPage from './pages/PlacesFormPage'
@@ -41,12 +41,12 @@ function App() {
       <Route path="/" element={<Layout/>}>
         <Route index element={<IndexPage/>} />
         <Route path="/account/bookings/:id" element={<BookingPage />} />
-        <Route path="/booking" element={<Booking />} />
+        <Route path="/booking/:id" element={<Booking />} />
         <Route path="/account/bookings" element={<BookingsPage />} />
         <Route path="/account" element={<ProfilePage />} />
-          <Route path="/account/places" element={<PlacesPage />} />
+          {/* <Route path="/account/places" element={<PlacesPage />} /> */}
        <Route path='/account/:subpage/:action' element={<PlacesFormPage />}/>
-       <Route path='/places/:id' element={<PlacesPage />}/>
+       <Route path='/places/:id' element={<PlacePage />}/>
       
       
       </Route>

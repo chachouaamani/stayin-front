@@ -2,17 +2,28 @@ import {Link, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
+
 import PlaceGallery from "../PlaceGallery";
 import AddressLink from "../AddressLink";
 
+axios.defaults.baseURL = 'http://localhost:8800';
 export default function PlacePage() {
+  
+
+  
+
   const {id} = useParams();
   const [place,setPlace] = useState(null);
+  async function reserver(){
+    const response= await axios.post('/publish_appartement',place)
+   }
+ 
   useEffect(() => {
     if (!id) {
       return;
     }
     axios.get(`/places/${id}`).then(response => {
+    // axios.get(ApiRoutes.GetPlaceById.replace("{id}",id)).then(response => {
       setPlace(response.data);
     });
   }, [id]);
@@ -44,6 +55,18 @@ export default function PlacePage() {
         </div>
         <div className="mb-4 mt-2 text-sm text-gray-700 leading-5">{place.extraInfo}</div>
       </div>
+
+
+
+
+<div className=" text-center">
+            <Link  onClick={reserver} className="inline-flex gap-2 bg-primary mr-5 gap-2 text-white py-2 px-4 items-center rounded-full" to={'/booking/'+place._id}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+              <path fillRule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clipRule="evenodd" />
+            </svg>
+                Reserver</Link>
+            </div>
+      
     </div>
   );
 }
