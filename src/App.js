@@ -41,7 +41,7 @@ function App() {
       <Route path="/" element={<Layout/>}>
         <Route index element={<IndexPage/>} />
         <Route path="/account/bookings/:id" element={<BookingPage />} />
-        <Route path="/booking" element={<Booking />} />
+        <Route path="/booking/:id" element={<Booking />} />
         <Route path="/account/bookings" element={<BookingsPage />} />
         <Route path="/account" element={<ProfilePage />} />
           {/* <Route path="/account/places" element={<PlacesPage />} /> */}
