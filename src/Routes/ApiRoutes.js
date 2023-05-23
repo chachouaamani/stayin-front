@@ -1,6 +1,6 @@
 export class ApiRoutes {
-    static Login = "/auth/login";
-    static SignUp = "/auth/signup";
+    static Login = "/login";
+    static SignUp = "/signup";
 
 
     static GetReservation ="/ms-reservation/reservation/getReservations";

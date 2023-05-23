@@ -23,7 +23,7 @@ export default function Booking(){
     const [email,setEmail] = useState('');
     const [redirect,setRedirect] = useState('');
     const [message, setMessage] = useState('');
-   
+    const [price, setPrice] =useState('');
 
     const queryParameters = new URLSearchParams(window.location.search) 
    // const AppartementId = queryParameters.get("id") 
@@ -38,30 +38,26 @@ export default function Booking(){
     
     const [reservedDates, setReservedDates] = useState([]);
      
-    const isoDate = "2023-05-01T00:00:00.000Z";
+    const [date, setDate] = useState([
+      {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: "selection",
+      },
+    ]);
 
-  const datee = new Date(isoDate);
 
-const options = {
-  weekday: "short",
-  month: "short",
-  day: "2-digit",
-  year: "numeric",
-  hour: "2-digit",
-  minute: "2-digit",
-  second: "2-digit",
-  timeZoneName: "long"
-};
+    let numberOfNights = 0;
+    if (date[0].startDate && date[0].endDate) {
+      numberOfNights = differenceInCalendarDays(new Date(date[0].startDate), new Date(date[0].endDate));
+    } 
 
-const formattedDate = datee.toLocaleString("en-US", options);
-console.log(formattedDate);
-   
    
     try{
       axios.get(`ms-reservation/reservation/getAppartementId/${id}` ).then(async (response)=>{
         setAppartement(response.data)
        const reservedDates = await appartement.reservedDates;
-      
+        setPrice(numberOfNights*appartement.price);
      /*  for (let i = 0; i < reservedDates.length; i++) {
           const date=new Date(reservedDates[i])
           const dateString= date.toLocaleDateString();
@@ -70,6 +66,7 @@ console.log(formattedDate);
       setReservedDates(reservedDates);
 
        });
+      
        
      
     }catch(error){
@@ -80,17 +77,27 @@ console.log(formattedDate);
      //  const reservedDates = appartement.reservedDates;
        console.log(reservedDates);
     
+       /* const formattedDates = reservedDates.map((isoDate) => {
+        const date = new Date(isoDate);
       
+        const options = {
+          weekday: "short",
+          month: "short",
+          day: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          timeZoneName: "long"
+        };
+      
+        return date.toLocaleString("en-US", options);
+      });
+      
+      console.log(formattedDates); */
 
 
-    const [date, setDate] = useState([
-      {
-        startDate: new Date(),
-        endDate: new Date(),
-        key: "selection",
-      },
-    ]);
-
+   
   
      
 
@@ -98,11 +105,7 @@ console.log(formattedDate);
       return reservedDates.includes(date);
     }; */
     
-    let numberOfNights = 0;
-    if (date[0].startDate && date[0].endDate) {
-      numberOfNights = differenceInCalendarDays(new Date(date[0].startDate), new Date(date[0].endDate));
-    } 
-
+    
 
 
     
@@ -120,6 +123,7 @@ console.log(formattedDate);
           name: name,
           phone: phone,
           email: email,
+          price:price,
           user: '644b00f26adfdd50acfb1324',
           reserved: false,
       //  reservedDates:["2023-05-03" , "2023-05-04", "2023-05-05"],
