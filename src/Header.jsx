@@ -1,7 +1,30 @@
 import {Link} from "react-router-dom";
 import axios from "axios";
+import { useEffect, useState } from "react";
+
+import io from "socket.io-client";
+
+
+
 
 export default function Header(){
+const [user,setUser] =useState("")
+  const [socket, setSocket] =useState(null)
+
+  useEffect(()=>{
+    const socket= io(`http://localhost:8800`)
+   // console.log(socket)
+})
+
+
+
+  /* useEffect(() => {
+    socket?.emit("AddNewUser", user);
+  }, [socket, user]) */
+
+
+
+  
 
     return (
       <div>
