@@ -12,8 +12,18 @@ import { DateRange } from "react-date-range";
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-
+import { AppConsts } from "./Routes/AppConsts";
 export default function Booking(){
+
+
+
+  function GetUserId(){
+    var token = localStorage.getItem(AppConsts.JwtTokenKey);
+    var body = JSON.parse(atob(token.split('.')[1]));
+    return body.nameid;
+  }
+  console.log('user'+GetUserId())
+
 
     const [checkIn,setCheckIn] = useState('');
     const [checkOut,setCheckOut] = useState('');
@@ -73,7 +83,7 @@ export default function Booking(){
 
     }
     //   console.log(appartement)
-    
+     axios.post("")
      //  const reservedDates = appartement.reservedDates;
        console.log(reservedDates);
     
