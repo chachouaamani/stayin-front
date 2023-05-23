@@ -5,8 +5,6 @@ import { ApiRoutes } from "../Routes/ApiRoutes";
 import { AppConsts } from "../Routes/AppConsts";
 import { Link } from "react-router-dom";
 
-
-
 // Whether we are currently logging in
 var mLoggingIn = false;
 
@@ -94,9 +92,6 @@ async function Login(event) {
   // Set button content back to log in
   event.target.textContent = "Log in";
 }
-
-
-
 
 const LoginPage = () => {
   return (
