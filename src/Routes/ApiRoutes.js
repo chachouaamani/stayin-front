@@ -1,6 +1,6 @@
 export class ApiRoutes {
-    static Login = "/login";
-    static SignUp = "/signup";
+    static Login = "/auth/login";
+    static SignUp = "/auth/signup";
 
     static UploadFile = "/storage/file/upload";
     static FileById = "/storage/file/{id}";
