@@ -1,18 +1,18 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import AddressLink from "../AddressLink";
-import PlaceGallery from "../PlaceGallery";
 import BookingDates from "../BookingDates";
 import { ApiRoutes } from "../Routes/ApiRoutes";
-axios.defaults.baseURL = 'http://localhost:8800';
+import { AppConsts } from "../Routes/AppConsts";
+
+axios.defaults.baseURL = AppConsts.ServerAddress;
 
 export default function BookingPage() {
   const {id} = useParams();
   const [reservation,setReservation] = useState(null);
   useEffect(() => {
     if (id) {
-      axios.get(ApiRoutes.GetReservation).then(response => {
+      axios.get(ApiRoutes.GetReservations).then(response => {
         const foundBooking = response.data.find(({_id}) => _id === id);
         if (foundBooking) {
           setReservation(foundBooking);

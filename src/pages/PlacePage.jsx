@@ -1,17 +1,13 @@
-import {Link, useParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
-
-
 import PlaceGallery from "../PlaceGallery";
 import AddressLink from "../AddressLink";
+import { AppConsts } from "../Routes/AppConsts";
+import { ApiRoutes } from "../Routes/ApiRoutes";
+axios.defaults.baseURL = AppConsts.ServerAddress;
 
-axios.defaults.baseURL = 'http://localhost:8800';
 export default function PlacePage() {
-  
-
-  
-
   const {id} = useParams();
   const [place,setPlace] = useState(null);
  
@@ -20,7 +16,7 @@ export default function PlacePage() {
     if (!id) {
       return;
     }
-    axios.get(`/places/${id}`).then(response => { 
+    axios.get(ApiRoutes.GetPlaceById.replace("{id}", id)).then(response => { 
       setPlace(response.data);
     });
   }, [id]);

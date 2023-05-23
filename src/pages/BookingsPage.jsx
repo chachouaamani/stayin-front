@@ -2,13 +2,10 @@ import AccountNav from "../AccountNav.jsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-import {differenceInCalendarDays, format} from "date-fns";
-import {Link} from "react-router-dom";
-import BookingDates from "../BookingDates";
-import { PageRoutes } from "../Routes/PageRoutes.js";
 import { ApiRoutes } from "../Routes/ApiRoutes.js";
+import { AppConsts } from "../Routes/AppConsts";
 
-axios.defaults.baseURL = 'http://localhost:8800';
+axios.defaults.baseURL = AppConsts.ServerAddress;
 
 
 export default function BookingsPage() {

@@ -1,25 +1,22 @@
 //import PhotosUploader from "../PhotosUploader.jsx";
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
 import AccountNav from "../AccountNav";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Perks from "../Perks.jsx";
 import axios from "axios";
+import { AppConsts } from "../Routes/AppConsts";
+import { ApiRoutes } from "../Routes/ApiRoutes";
+import { PageRoutes } from "../Routes/PageRoutes";
 
-axios.defaults.baseURL = 'http://localhost:8800';
-var storageReadFile = "https://localhost:5000/file/"
-var storageUploadFile = "https://localhost:5000/file/upload"
+axios.defaults.baseURL = AppConsts.ServerAddress;
 
 export default function PlacesFormPage() {
   // const {id} = useParams();
   const [title, setTitle] = useState('');
-
   const [wilaya, setWilaya] = useState('');
   const [comun, setComun] = useState('');
   const [street, setStreet] = useState('');
-
   const [addedPhotos, setAddedPhotos] = useState([]);
-
   const [description, setDescription] = useState('');
   const [perks, setPerks] = useState([]);
   const [extraInfo, setExtraInfo] = useState('');
@@ -88,7 +85,7 @@ export default function PlacesFormPage() {
       file.Content = window.btoa(reader.result);
 
       // Send request to storage server
-      var result = await fetch(storageUploadFile,
+      var result = await fetch(AppConsts.ServerAddress + ApiRoutes.UploadFile,
         {
           method: "post",
           body: JSON.stringify(file),
@@ -118,20 +115,16 @@ export default function PlacesFormPage() {
 
   async function savePlace(ev) {
     ev.preventDefault();
-    await axios.post('/places', {
+    await axios.post(ApiRoutes.AddPlace, {
       title, wilaya, comun, street, addedPhotos,
       description, perks, extraInfo,
-
       checkIn, checkOut, maxGuests, price
-
     });
     setRedirect(true);
-
-
   }
 
   if (redirect) {
-    return <Navigate to={'/account/places'} />
+    return <Navigate to={PageRoutes.AccountPlaces} />
   }
 
   return (
@@ -191,7 +184,7 @@ export default function PlacesFormPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                 </svg>
               </button>
-              <img src={storageReadFile + fileId} className="rounded-2xl w-full object-cover" />
+              <img src={AppConsts.ServerAddress + ApiRoutes.FileById.replace("{id}", fileId)} className="rounded-2xl w-full object-cover" />
 
             </div>
           ))}

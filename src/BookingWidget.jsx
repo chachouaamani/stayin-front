@@ -3,6 +3,8 @@ import {differenceInCalendarDays} from "date-fns";
 import axios from "axios";
 import {Navigate} from "react-router-dom";
 import {UserContext} from "./UserContext.jsx";
+import { ApiRoutes } from "./Routes/ApiRoutes.js";
+import { PageRoutes } from "./Routes/PageRoutes.js";
 
 export default function BookingWidget({appartement}) {
   const [checkIn,setCheckIn] = useState('');
@@ -25,13 +27,13 @@ export default function BookingWidget({appartement}) {
   }
 
   async function bookThisPlace() {
-    const response = await axios.post('ms-reservation/reservation/createReservation', {
+    const response = await axios.post(ApiRoutes.CreateReservation, {
       checkIn,checkOut,numberOfGuests,name,phone,
       appartement:appartement._id,
       price:numberOfNights * appartement.price,
     });
     const bookingId = response.data._id;
-    setRedirect(`ms-reservation/account/bookings/${bookingId}`);
+    setRedirect(PageRoutes.AccountBookingById.replace(":id", bookingId));
   }
 
   if (redirect) {

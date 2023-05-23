@@ -1,6 +1,7 @@
 import {createContext, useEffect, useState} from "react";
 import axios from "axios";
 import {data} from "autoprefixer";
+import { ApiRoutes } from "./Routes/ApiRoutes";
 
 export const UserContext = createContext({});
 
@@ -9,7 +10,7 @@ export function UserContextProvider({children}) {
   const [ready,setReady] = useState(false);
   useEffect(() => {
     if (!user) {
-      axios.get('/profile').then(({data}) => {
+      axios.get(ApiRoutes.Profile ).then(({data}) => {
         setUser(data);
         setReady(true);
       });

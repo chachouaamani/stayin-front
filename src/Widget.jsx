@@ -2,6 +2,7 @@ import BookingWidget from "./BookingWidget";
 import {Link, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import { ApiRoutes } from "./Routes/ApiRoutes";
 
 export default function Widget() {
 
@@ -11,7 +12,7 @@ export default function Widget() {
       if (!id) {
         return;
       }
-      axios.get(`ms-reservation/places/${id}`).then(response => {
+      axios.get(ApiRoutes.ReservationGetPlaces.replace("{id}", id)).then(response => {
         setAppartement(response.data);
       });
     }, [id]);

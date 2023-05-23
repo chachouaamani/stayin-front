@@ -2,14 +2,16 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import Image from "../Image.jsx";
-import AccountNav from "../AccountNav";
-axios.defaults.baseURL = 'http://localhost:8800';
+import { AppConsts } from "../Routes/AppConsts";
+import { ApiRoutes } from "../Routes/ApiRoutes";
+import { PageRoutes } from "../Routes/PageRoutes.js";
 
+axios.defaults.baseURL = AppConsts.ServerAddress;
 
 export default function IndexPage() {
   const [places,setPlaces] = useState([]);
   useEffect(() => {
-    axios.get('/places/all').then(response => {
+    axios.get(ApiRoutes.GetAllPlaces).then(response => {
       setPlaces(response.data);
     });
   }, []);
@@ -18,7 +20,7 @@ export default function IndexPage() {
    
     <div className="mt-8 grid gap-x-6 gap-y-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
       {places.length > 0 && places.map(place => (
-        <Link to={'/places/'+place._id}>
+        <Link to={PageRoutes.PlaceById.replace(":id",place._id)}>
           <div className="w-400 h-60 rounded-2xl flex">
             {place.photos?.[0] && (
               <Image className="rounded-2xl h-full w-full aspect-square " src={place.photos?.[0]} alt=""/>
